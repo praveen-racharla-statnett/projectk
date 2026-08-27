@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Praveen Racharla — Cloud and Platform Engineer in Oslo, Norway." />
+    <meta name="theme-color" content="#0d1b2a" />
+    <title>Praveen Racharla | Cloud & Platform Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="logo" href="#home" aria-label="Praveen home">PR<span>.</span></a>
+      <button class="menu-button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+      <nav id="nav-menu" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="status"><i></i> Based in Oslo, Norway</div>
+        <p class="eyebrow">Hello, I’m</p>
+        <h1>Praveen<br /><span>Racharla.</span></h1>
+        <p class="intro">Cloud & Platform Engineer building dependable infrastructure, smooth deployments, and resilient production systems.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#contact">Let’s connect <span>↗</span></a>
+          <a class="button secondary" href="#experience">View experience</a>
+        </div>
+        <div class="orbit" aria-hidden="true"><span>PR</span></div>
+      </section>
+
+      <section class="about" id="about">
+        <p class="section-label">01 / About</p>
+        <h2>Engineering calm into complex systems.</h2>
+        <div class="about-grid">
+          <p>I work across cloud infrastructure, platform operations, databases, and distributed systems. My focus is making environments reliable, repeatable, and easier for teams to operate.</p>
+          <div class="facts">
+            <div><strong>Oslo</strong><span>Current base</span></div>
+            <div><strong>Cloud</strong><span>Infrastructure focus</span></div>
+            <div><strong>Ops</strong><span>Production mindset</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="experience" id="experience">
+        <p class="section-label">02 / Expertise</p>
+        <h2>What I work with.</h2>
+        <div class="cards">
+          <article><span>01</span><h3>Cloud & Infrastructure</h3><p>OCI, Terraform, Linux, networking, secure and repeatable environments.</p></article>
+          <article><span>02</span><h3>Platform Operations</h3><p>Automation, observability, incident analysis, upgrades and production reliability.</p></article>
+          <article><span>03</span><h3>Data Platforms</h3><p>Oracle, Kafka, OpenSearch, Hadoop and dependable data movement at scale.</p></article>
+        </div>
+        <div class="skills" aria-label="Technical skills">
+          <span>Oracle Linux</span><span>OCI</span><span>Terraform</span><span>Ansible</span><span>Kafka</span><span>OpenSearch</span><span>Oracle DB</span><span>Docker</span>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <p class="section-label">03 / Contact</p>
+        <h2>Have a platform challenge?</h2>
+        <p>I’m always happy to connect, exchange ideas, and talk about cloud and infrastructure.</p>
+        <a class="button light" href="mailto:your-email@example.com">Send an email <span>↗</span></a>
+        <small>Replace the placeholder email with your preferred address.</small>
+      </section>
+    </main>
+
+    <footer><span>© <b id="year"></b> Praveen Racharla</span><a href="#home">Back to top ↑</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
