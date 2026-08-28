@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1428"/>
+      <stop offset="1" stop-color="#152441"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#0877e8"/>
+      <stop offset="1" stop-color="#39a7ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="105" fill="url(#bg)"/>
+
+  <!-- P -->
+  <path fill="#fff" d="
+    M165 112
+    H292
+    C372 112 421 158 421 226
+    C421 294 372 340 292 340
+    H247
+    V287
+    H292
+    C337 287 364 265 364 226
+    C364 187 337 165 292 165
+    H222
+    V286
+    L165 343
+    Z
+  "/>
+
+  <!-- Blue accent -->
+  <path fill="url(#accent)" d="M117 400 L222 295 L222 400 Z"/>
+</svg>
