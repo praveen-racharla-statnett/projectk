@@ -6,6 +6,10 @@
   <title>My Website</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
@@ -16,6 +20,7 @@
         <a href="#home">Home</a>
         <a href="#section1">Section 1</a>
         <a href="#section2">Section 2</a>
+        <a href="#budget">Budget</a>
         <a href="#contact">Contact</a>
         <button class="nav-logout" id="logoutButton" type="button">Log out</button>
       </nav>
@@ -62,6 +67,45 @@
         <p>Add anything you want here later.</p>
       </div>
     </section>
+<section class="section alt" id="budget">
+  <div class="container">
+    <div class="budget-heading-row">
+      <div>
+        <p class="eyebrow">BUDGET</p>
+        <h2>Budget overview</h2>
+      </div>
+
+      <div class="budget-filters">
+        <div class="filter-toggle">
+          <button type="button" class="filter-toggle-btn active" data-view="month">Month</button>
+          <button type="button" class="filter-toggle-btn" data-view="year">Year</button>
+        </div>
+
+        <select id="monthFilter" class="budget-select" aria-label="Month"></select>
+        <select id="yearFilter" class="budget-select" aria-label="Year"></select>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-topline">
+        <span id="chartPeriodLabel">Monthly view</span>
+      </div>
+
+      <div class="chart-total">
+        <span>TOTAL BUDGET</span>
+        <strong id="chartTotal">0 kr</strong>
+      </div>
+
+      <div class="budget-layout">
+        <div class="chart-wrap">
+          <canvas id="budgetDonut" aria-label="Nested budget donut chart"></canvas>
+        </div>
+      </div>
+
+      <p class="chart-note">Outer ring shows sub-categories</p>
+    </div>
+  </div>
+</section>
 
     <section class="section" id="contact">
       <div class="container">
@@ -80,6 +124,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="budget-data.js"></script>
+  <script src="budget-chart.js"></script>
   <script src="script.js"></script>
   <script>
     protectPage();
