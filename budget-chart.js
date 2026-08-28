@@ -5,7 +5,6 @@
   const monthFilter = document.getElementById("monthFilter");
   const yearFilter = document.getElementById("yearFilter");
   const viewButtons = [...document.querySelectorAll(".filter-toggle-btn")];
-  const totalEl = document.getElementById("chartTotal");
   const periodLabel = document.getElementById("chartPeriodLabel");
 
   const kr = new Intl.NumberFormat("nb-NO", {
@@ -100,6 +99,66 @@
   function pct(amount, total) {
     return total ? (Number(amount) / total) * 100 : 0;
   }
+
+  const centerTotalPlugin = {
+  id: "centerTotal",
+
+  afterDatasetsDraw(chart) {
+    const { ctx } = chart;
+
+    const total = chart.$budgetTotal || 0;
+    const formatter = chart.$currencyFormatter;
+
+    // Inner category dataset
+    const meta = chart.getDatasetMeta(0);
+
+    if (!meta?.data?.length) {
+      return;
+    }
+
+    // Get exact center of donut
+    const firstArc = meta.data[0];
+
+    const centerX = firstArc.x;
+    const centerY = firstArc.y;
+
+    const compact = chart.width < 700;
+
+    const titleSize = compact ? 10 : 13;
+    const amountSize = compact ? 22 : 34;
+
+    ctx.save();
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // TOTAL BUDGET
+    ctx.fillStyle = "#667085";
+
+    ctx.font =
+      `700 ${titleSize}px "Inter", Arial, sans-serif`;
+
+    ctx.fillText(
+      "TOTAL BUDGET",
+      centerX,
+      centerY - 22
+    );
+
+    // 790 501 kr
+    ctx.fillStyle = "#111111";
+
+    ctx.font =
+      `700 ${amountSize}px "Inter", Arial, sans-serif`;
+
+    ctx.fillText(
+      formatter(total),
+      centerX,
+      centerY + 10
+    );
+
+    ctx.restore();
+  }
+};
 
   const innerRingLabelsPlugin = {
     id: "innerRingLabels",
@@ -317,8 +376,6 @@
       0
     );
 
-    totalEl.textContent = kr.format(data.income || expenseTotal);
-
     periodLabel.textContent =
       currentView === "year"
         ? `Yearly view · ${yearFilter.value}`
@@ -341,7 +398,7 @@
 
     chart = new Chart(canvas, {
       type: "doughnut",
-      plugins: [innerRingLabelsPlugin, outerRingCalloutsPlugin],
+      plugins: [innerRingLabelsPlugin, outerRingCalloutsPlugin, centerTotalPlugin],
 
       data: {
         labels: categories.map(item => item.name),
@@ -398,6 +455,7 @@
     chart.$subCategoryData = categories;
     chart.$expenseTotal = expenseTotal;
     chart.$parentColors = parentColors;
+    chart.$budgetTotal = data.income || expenseTotal;
     chart.$currencyFormatter = amount => kr.format(amount);
     chart.update();
   }
