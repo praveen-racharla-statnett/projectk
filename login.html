@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-card">
+      <a class="auth-brand" href="login.html">Logo</a>
+
+      <p class="eyebrow">PRIVATE WEBSITE</p>
+      <h1 class="auth-title">Welcome back.</h1>
+      <p class="auth-copy">Sign in to continue.</p>
+
+      <form id="loginForm" class="auth-form">
+        <label>
+          Email
+          <input id="email" type="email" autocomplete="email" required />
+        </label>
+
+        <label>
+          Password
+          <input id="password" type="password" autocomplete="current-password" required />
+        </label>
+
+        <button class="button auth-button" type="submit">Sign in</button>
+      </form>
+
+      <p id="authMessage" class="auth-message" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    redirectIfLoggedIn();
+
+    document.getElementById("loginForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const message = document.getElementById("authMessage");
+      const button = event.currentTarget.querySelector("button");
+      message.textContent = "";
+      button.disabled = true;
+      button.textContent = "Signing in...";
+
+      const result = await login(
+        document.getElementById("email").value,
+        document.getElementById("password").value
+      );
+
+      if (result?.error) {
+        message.textContent = result.error.message;
+        button.disabled = false;
+        button.textContent = "Sign in";
+      }
+    });
+  </script>
+</body>
+</html>
