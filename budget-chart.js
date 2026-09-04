@@ -293,7 +293,7 @@
 
       const minY = chartArea.top + 18;
       const maxY = chartArea.bottom - 18;
-      const minGap = chart.width < 800 ? 34 : 40;
+      const minGap = chart.width < 800 ? 27 : 32;
 
       resolveOverlaps(leftLabels, minGap, minY, maxY);
       resolveOverlaps(rightLabels, minGap, minY, maxY);
@@ -411,7 +411,8 @@
             ),
             borderColor: "#ffffff",
             borderWidth: 2,
-            radius: "75%",
+
+            radius: "64%",
             cutout: "5%"
           },
           {
@@ -420,8 +421,9 @@
             backgroundColor: outerColors,
             borderColor: "#ffffff",
             borderWidth: 2,
-            radius: "100%",
-            cutout: "74%"
+
+            radius: "85%",
+            cutout: "63%"
           }
         ]
       },
