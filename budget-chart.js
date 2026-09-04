@@ -138,8 +138,25 @@
     ctx.font =
       `700 ${titleSize}px "Inter", Arial, sans-serif`;
 
+    const monthNames = {
+      Jan: "January",
+      Feb: "February",
+      Mar: "March",
+      Apr: "April",
+      May: "May",
+      Jun: "June",
+      Jul: "July",
+      Aug: "August",
+      Sep: "September",
+      Oct: "October",
+      Nov: "November",
+      Dec: "December"
+    };
+
     ctx.fillText(
-      "TOTAL BUDGET",
+      currentView === "year"
+        ? `${yearFilter.value} Expenses`
+        : `${monthNames[monthFilter.value]} Expenses`,
       centerX,
       centerY - 22
     );
