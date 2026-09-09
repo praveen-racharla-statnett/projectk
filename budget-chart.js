@@ -39,12 +39,32 @@
 
   function populateMonths() {
     monthFilter.innerHTML = "";
-    const months = Object.keys(window.BUDGET_DATA[yearFilter.value] || {});
-    months.forEach(month => monthFilter.add(new Option(month, month)));
-    if (months.length) monthFilter.value = months[0];
-  }
 
-  yearFilter.value = years[0];
+    const months = Object.keys(
+      window.BUDGET_DATA[yearFilter.value] || {}
+    );
+
+    months.forEach(month =>
+      monthFilter.add(new Option(month, month))
+    );
+
+    const currentMonth = new Date().toLocaleString("en-US", {
+      month: "long"
+    });
+
+    if (months.includes(currentMonth)) {
+      monthFilter.value = currentMonth;
+    } else if (months.length) {
+      monthFilter.value = months[0];
+    }
+  }  
+
+  const currentYear = String(new Date().getFullYear());
+
+  yearFilter.value = years.includes(currentYear)
+    ? currentYear
+    : years[0];
+
   populateMonths();
 
   function aggregateForYear(year) {
@@ -457,7 +477,7 @@
     chart.$subCategoryData = categories;
     chart.$expenseTotal = expenseTotal;
     chart.$parentColors = parentColors;
-    chart.$budgetTotal = data.income || expenseTotal;
+    chart.$budgetTotal = expenseTotal;
     chart.$currencyFormatter = amount => kr.format(amount);
     chart.update();
   }
