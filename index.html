@@ -119,6 +119,48 @@
           aria-label="Monthly income and expense trend">
         </canvas>
       </div>
+
+      <div class="trend-summary">
+      <div class="trend-summary-card surplus-card">
+        <div class="trend-summary-icon">↑</div>
+        <div>
+          <strong id="surplusMonths">0 months with surplus</strong>
+          <span id="surplusMonthNames">—</span>
+          <p>Income was higher than expenses.</p>
+        </div>
+      </div>
+
+      <div class="trend-summary-card deficit-card">
+        <div class="trend-summary-icon">↓</div>
+        <div>
+          <strong id="deficitMonths">0 months with deficit</strong>
+          <span id="deficitMonthNames">—</span>
+          <p>Expenses were higher than income.</p>
+        </div>
+      </div>
+
+      <div class="trend-summary-card total-card">
+        <div class="trend-summary-icon">Σ</div>
+        <div>
+          <strong id="trendYearTotal">Total</strong>
+
+          <div class="trend-total-row">
+            <span>Income</span>
+            <span id="yearIncomeTotal">0 kr</span>
+          </div>
+
+          <div class="trend-total-row">
+            <span>Expenses</span>
+            <span id="yearExpenseTotal">0 kr</span>
+          </div>
+
+          <div class="trend-total-row trend-net">
+            <span>Net</span>
+            <span id="yearNetTotal">0 kr</span>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </section>
