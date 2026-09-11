@@ -85,9 +85,11 @@
     const incomeMap = new Map();
 
     (incomes || []).forEach(row => {
+      const key = `${row.year}-${row.month}`;
+
       incomeMap.set(
-        `${row.year}-${row.month}`,
-        Number(row.amount || 0)
+        key,
+        (incomeMap.get(key) || 0) + Number(row.amount || 0)
       );
     });
 
@@ -158,7 +160,7 @@
 
       if (!budgetData[year][month]) {
         budgetData[year][month] = {
-          income: Number(row.amount || 0),
+          income: incomeMap.get(`${row.year}-${row.month}`) || 0,
           categories: []
         };
       }
