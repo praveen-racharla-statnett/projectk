@@ -49,7 +49,7 @@
     );
 
     const currentMonth = new Date().toLocaleString("en-US", {
-      month: "long"
+      month: "short"
     });
 
     if (months.includes(currentMonth)) {
