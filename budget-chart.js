@@ -428,27 +428,33 @@
         labels: months,
 
         datasets: [
-          {
-            label: "Income",
-            data: monthlyIncome,
-            borderColor: "#79bf67",
-            backgroundColor: "#79bf67",
-            tension: 0.3,
-            borderWidth: 3,
-            pointRadius: 4,
-            pointHoverRadius: 6
-          },
-          {
-            label: "Expenses",
-            data: monthlyExpenses,
-            borderColor: "#f28b55",
-            backgroundColor: "#f28b55",
-            tension: 0.3,
-            borderWidth: 3,
-            pointRadius: 4,
-            pointHoverRadius: 6
-          }
-        ]
+            {
+              label: "Income",
+              data: monthlyIncome,
+              borderColor: "#79bf67",
+              backgroundColor: "rgba(121, 191, 103, 0.18)",
+              tension: 0.3,
+              borderWidth: 3,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              fill: {
+                target: 1,
+                above: "rgba(121, 191, 103, 0.18)",
+                below: "rgba(242, 139, 85, 0.18)"
+              }
+            },
+            {
+              label: "Expenses",
+              data: monthlyExpenses,
+              borderColor: "#f28b55",
+              backgroundColor: "#f28b55",
+              tension: 0.3,
+              borderWidth: 3,
+              pointRadius: 4,
+              pointHoverRadius: 6,
+              fill: false
+            }
+          ]
       },
 
       options: {
@@ -468,8 +474,26 @@
 
           tooltip: {
             callbacks: {
+              title(items) {
+                return `${items[0].label} ${year}`;
+              },
+
               label(context) {
                 return `${context.dataset.label}: ${kr.format(context.raw)}`;
+              },
+
+              afterBody(items) {
+                const index = items[0].dataIndex;
+
+                const income = monthlyIncome[index];
+                const expenses = monthlyExpenses[index];
+                const difference = income - expenses;
+
+                if (difference >= 0) {
+                  return `\nSurplus: ${kr.format(difference)}`;
+                }
+
+                return `\nDeficit: ${kr.format(Math.abs(difference))}`;
               }
             }
           }
