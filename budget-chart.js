@@ -30,6 +30,7 @@
   };
 
   let chart;
+  let incomeExpenseChart;
   let currentView = "month";
 
   const years = Object.keys(window.BUDGET_DATA)
@@ -386,6 +387,140 @@
     }
   };
 
+  function renderIncomeExpenseTrend() {
+    const trendCanvas = document.getElementById("incomeExpenseChart");
+    const trendYearFilter = document.getElementById("trendYearFilter");
+
+    if (!trendCanvas || !trendYearFilter) return;
+
+    const year = trendYearFilter.value;
+
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    const monthlyIncome = months.map(month => {
+      const monthData = window.BUDGET_DATA?.[year]?.[month];
+
+      return Number(monthData?.income || 0);
+    });
+
+    const monthlyExpenses = months.map(month => {
+      const monthData = window.BUDGET_DATA?.[year]?.[month];
+
+      if (!monthData) return 0;
+
+      return (monthData.categories || []).reduce(
+        (sum, item) => sum + Number(item.amount || 0),
+        0
+      );
+    });
+
+    if (incomeExpenseChart) {
+      incomeExpenseChart.destroy();
+    }
+
+    incomeExpenseChart = new Chart(trendCanvas, {
+      type: "line",
+
+      data: {
+        labels: months,
+
+        datasets: [
+          {
+            label: "Income",
+            data: monthlyIncome,
+            borderColor: "#79bf67",
+            backgroundColor: "#79bf67",
+            tension: 0.3,
+            borderWidth: 3,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          },
+          {
+            label: "Expenses",
+            data: monthlyExpenses,
+            borderColor: "#f28b55",
+            backgroundColor: "#f28b55",
+            tension: 0.3,
+            borderWidth: 3,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }
+        ]
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        interaction: {
+          mode: "index",
+          intersect: false
+        },
+
+        plugins: {
+          legend: {
+            display: true,
+            position: "top"
+          },
+
+          tooltip: {
+            callbacks: {
+              label(context) {
+                return `${context.dataset.label}: ${kr.format(context.raw)}`;
+              }
+            }
+          }
+        },
+
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+
+          y: {
+            beginAtZero: true,
+
+            ticks: {
+              callback(value) {
+                return kr.format(value);
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function initializeTrendChart() {
+    const trendYearFilter = document.getElementById("trendYearFilter");
+
+    if (!trendYearFilter) return;
+
+    trendYearFilter.innerHTML = "";
+
+    years.forEach(year => {
+      trendYearFilter.add(new Option(year, year));
+    });
+
+    const currentYear = String(new Date().getFullYear());
+
+    trendYearFilter.value = years.includes(currentYear)
+      ? currentYear
+      : years[0];
+
+    trendYearFilter.addEventListener(
+      "change",
+      renderIncomeExpenseTrend
+    );
+
+    renderIncomeExpenseTrend();
+  }
+
   function render() {
     const data = selectedData();
     const categories = data.categories || [];
@@ -502,6 +637,8 @@
 
   monthFilter.addEventListener("change", render);
 
+  initializeTrendChart();
+  
   if (document.fonts) {
     document.fonts.ready.then(render);
   } else {

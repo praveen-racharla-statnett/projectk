@@ -99,6 +99,27 @@
 
       <p class="chart-note">Outer ring shows sub-categories</p>
     </div>
+    <div class="chart-card trend-card">
+      <div class="trend-chart-header">
+        <div>
+          <p class="eyebrow">YEARLY TREND</p>
+          <h3>Income vs Expenses</h3>
+        </div>
+
+        <select
+          id="trendYearFilter"
+          class="budget-select"
+          aria-label="Trend year">
+        </select>
+      </div>
+
+      <div class="trend-chart-wrap">
+        <canvas
+          id="incomeExpenseChart"
+          aria-label="Monthly income and expense trend">
+        </canvas>
+      </div>
+    </div>
   </div>
 </section>
 
