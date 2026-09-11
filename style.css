@@ -523,3 +523,100 @@ html:not(.authenticated) body:not(.auth-page) {
     height: 340px;
   }
 }
+
+.trend-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.trend-summary-card {
+  display: flex;
+  gap: 16px;
+  min-height: 145px;
+  padding: 22px;
+  border-radius: 18px;
+  font-family: "Inter", sans-serif;
+}
+
+.trend-summary-icon {
+  flex-shrink: 0;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.trend-summary-card strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 1.05rem;
+  color: #182033;
+}
+
+.trend-summary-card > div:last-child {
+  width: 100%;
+}
+
+.trend-summary-card span {
+  font-size: 0.9rem;
+  color: #667085;
+}
+
+.trend-summary-card p {
+  margin: 8px 0 0;
+  font-size: 0.84rem;
+  color: #7a8190;
+}
+
+.surplus-card {
+  background: rgba(121, 191, 103, 0.10);
+}
+
+.surplus-card .trend-summary-icon {
+  color: #33924a;
+}
+
+.deficit-card {
+  background: rgba(242, 90, 100, 0.09);
+}
+
+.deficit-card .trend-summary-icon {
+  color: #d84c59;
+}
+
+.total-card {
+  background: rgba(93, 141, 230, 0.09);
+}
+
+.total-card .trend-summary-icon {
+  color: #3974c6;
+}
+
+.trend-total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 6px;
+}
+
+.trend-net {
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+.trend-net .positive {
+  color: #23863d;
+}
+
+.trend-net .negative {
+  color: #c73c49;
+}
+
+@media (max-width: 900px) {
+  .trend-summary {
+    grid-template-columns: 1fr;
+  }
+}

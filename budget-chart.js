@@ -417,6 +417,117 @@
       );
     });
 
+    const surplusMonthNames = [];
+    const deficitMonthNames = [];
+
+    let totalIncome = 0;
+    let totalExpenses = 0;
+
+    months.forEach((month, index) => {
+      const income = monthlyIncome[index];
+      const expenses = monthlyExpenses[index];
+
+      totalIncome += income;
+      totalExpenses += expenses;
+
+      // Ignore months where no data exists yet
+      if (income === 0 && expenses === 0) {
+        return;
+      }
+
+      if (income > expenses) {
+        surplusMonthNames.push(month);
+      } else if (expenses > income) {
+        deficitMonthNames.push(month);
+      }
+    });
+
+    const net = totalIncome - totalExpenses;
+
+    const surplusMonthsElement =
+      document.getElementById("surplusMonths");
+
+    const deficitMonthsElement =
+      document.getElementById("deficitMonths");
+
+    const surplusMonthNamesElement =
+      document.getElementById("surplusMonthNames");
+
+    const deficitMonthNamesElement =
+      document.getElementById("deficitMonthNames");
+
+    const yearIncomeTotalElement =
+      document.getElementById("yearIncomeTotal");
+
+    const yearExpenseTotalElement =
+      document.getElementById("yearExpenseTotal");
+
+    const yearNetTotalElement =
+      document.getElementById("yearNetTotal");
+
+    const trendYearTotalElement =
+      document.getElementById("trendYearTotal");
+
+
+    if (surplusMonthsElement) {
+      surplusMonthsElement.textContent =
+        `${surplusMonthNames.length} ${
+          surplusMonthNames.length === 1 ? "month" : "months"
+        } with surplus`;
+    }
+
+    if (deficitMonthsElement) {
+      deficitMonthsElement.textContent =
+        `${deficitMonthNames.length} ${
+          deficitMonthNames.length === 1 ? "month" : "months"
+        } with deficit`;
+    }
+
+    if (surplusMonthNamesElement) {
+      surplusMonthNamesElement.textContent =
+        surplusMonthNames.length
+          ? surplusMonthNames.join(", ")
+          : "—";
+    }
+
+    if (deficitMonthNamesElement) {
+      deficitMonthNamesElement.textContent =
+        deficitMonthNames.length
+          ? deficitMonthNames.join(", ")
+          : "—";
+    }
+
+    if (trendYearTotalElement) {
+      trendYearTotalElement.textContent = `Total for ${year}`;
+    }
+
+    if (yearIncomeTotalElement) {
+      yearIncomeTotalElement.textContent =
+        kr.format(totalIncome);
+    }
+
+    if (yearExpenseTotalElement) {
+      yearExpenseTotalElement.textContent =
+        kr.format(totalExpenses);
+    }
+
+    if (yearNetTotalElement) {
+      const netLabel = net >= 0 ? "Surplus" : "Deficit";
+
+      yearNetTotalElement.textContent =
+        `${kr.format(Math.abs(net))} (${netLabel})`;
+
+      yearNetTotalElement.classList.toggle(
+        "positive",
+        net >= 0
+      );
+
+      yearNetTotalElement.classList.toggle(
+        "negative",
+        net < 0
+      );
+    }
+
     if (incomeExpenseChart) {
       incomeExpenseChart.destroy();
     }
