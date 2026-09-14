@@ -622,69 +622,178 @@ html:not(.authenticated) body:not(.auth-page) {
 }
 
 /* ==========================================
-   Yearly Financial Overview
+   Yearly Financial Overview Cards
 ========================================== */
 
-.overview-heading-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
-}
-
-.overview-heading-row .eyebrow {
-  margin-bottom: 4px;
-}
-
-.overview-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-  margin-top: 32px;
-}
-
 .overview-card {
+  position: relative;
+  overflow: hidden;
+
   padding: 24px;
   min-height: 190px;
 
   display: flex;
   flex-direction: column;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e7e9ee;
   border-radius: 20px;
 
   background: #ffffff;
 
   font-family: "Inter", sans-serif;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  animation: overviewCardIn 0.55s ease both;
 }
 
+
+/* stagger the loading animation */
+
+.overview-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.overview-card:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.overview-card:nth-child(3) {
+  animation-delay: 0.19s;
+}
+
+.overview-card:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+
+/* Hover */
+
+.overview-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.07),
+    0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* subtle colored line at top */
+
+.overview-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+
+  height: 3px;
+
+  border-radius: 0 0 5px 5px;
+}
+
+
+/* ============================
+   Card colors
+============================ */
+
+
+/* Income */
+
+.overview-card:nth-child(1)::before {
+  background: #22c55e;
+}
+
+.overview-card:nth-child(1) .overview-card-icon {
+  color: #15803d;
+  background: #dcfce7;
+}
+
+
+/* Expense */
+
+.overview-card:nth-child(2)::before {
+  background: #f97316;
+}
+
+.overview-card:nth-child(2) .overview-card-icon {
+  color: #c2410c;
+  background: #ffedd5;
+}
+
+
+/* Net Savings */
+
+.overview-card:nth-child(3)::before {
+  background: #3b82f6;
+}
+
+.overview-card:nth-child(3) .overview-card-icon {
+  color: #2563eb;
+  background: #dbeafe;
+}
+
+
+/* Savings Rate */
+
+.overview-card:nth-child(4)::before {
+  background: #8b5cf6;
+}
+
+.overview-card:nth-child(4) .overview-card-icon {
+  color: #7c3aed;
+  background: #ede9fe;
+}
+
+
+/* ============================
+   Icon
+============================ */
+
 .overview-card-icon {
+  width: 44px;
+  height: 44px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 42px;
-  height: 42px;
-
   margin-bottom: 20px;
 
-  border-radius: 12px;
+  border-radius: 13px;
 
-  background: #f4f6f8;
-
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
+
+  transition: transform 0.25s ease;
 }
+
+.overview-card:hover .overview-card-icon {
+  transform: scale(1.08);
+}
+
+
+/* ============================
+   Text
+============================ */
 
 .overview-card-label {
   margin-bottom: 10px;
 
   color: #667085;
 
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
 
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
 }
 
 .overview-card-value {
@@ -692,43 +801,68 @@ html:not(.authenticated) body:not(.auth-page) {
 
   margin-bottom: 8px;
 
-  font-size: clamp(1.65rem, 3vw, 2.2rem);
-  font-weight: 700;
-
   color: #182033;
+
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  font-weight: 750;
+
+  letter-spacing: -0.03em;
 }
 
 .overview-card-caption {
   margin-top: auto;
 
-  color: #8a9099;
+  color: #8b919c;
 
-  font-size: 0.82rem;
+  font-size: 0.8rem;
+}
+
+
+/* ============================
+   Initial animation
+============================ */
+
+@keyframes overviewCardIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+/* Financial overview layout */
+
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.overview-card {
+  width: auto;
+  min-width: 0;
 }
 
 
 /* Tablet */
-
-@media (max-width: 1000px) {
-
+@media (max-width: 900px) {
   .overview-cards {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 }
 
 
 /* Mobile */
-
 @media (max-width: 600px) {
-
-  .overview-heading-row {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
   .overview-cards {
     grid-template-columns: 1fr;
   }
-
 }
