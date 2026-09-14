@@ -945,6 +945,7 @@
 
   monthFilter.addEventListener("change", render);
 
+  initializeYearlyOverview();
   initializeTrendChart();
   
   if (document.fonts) {
