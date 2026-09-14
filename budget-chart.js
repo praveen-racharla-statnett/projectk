@@ -631,6 +631,179 @@
     });
   }
 
+  function renderYearlyOverview() {
+    const overviewYearFilter =
+      document.getElementById("overviewYearFilter");
+
+    if (!overviewYearFilter) return;
+
+    const year = overviewYearFilter.value;
+    const yearData = window.BUDGET_DATA?.[year] || {};
+
+    let yearlyIncome = 0;
+    let yearlyExpense = 0;
+
+    let annualSave = 0;
+    let sanvithII = 0;
+    let sanvith = 0;
+    let avdrag = 0;
+
+    Object.values(yearData).forEach(monthData => {
+
+      yearlyIncome += Number(monthData.income || 0);
+
+      (monthData.categories || []).forEach(item => {
+
+        const amount = Number(item.amount || 0);
+
+        yearlyExpense += amount;
+
+        const categoryName =
+          String(item.name || "")
+            .trim()
+            .toLowerCase();
+
+        switch (categoryName) {
+
+          case "annualsave":
+            annualSave += amount;
+            break;
+
+          case "sanvithii":
+            sanvithII += amount;
+            break;
+
+          case "sanvith":
+            sanvith += amount;
+            break;
+
+          case "avdrag":
+            avdrag += amount;
+            break;
+        }
+
+      });
+
+    });
+
+    /*
+    * Remaining money after every budget category
+    */
+    const netRemaining =
+      yearlyIncome - yearlyExpense;
+
+
+    /*
+    * User-defined Net Savings:
+    *
+    * annualsave
+    * + sanvithII
+    * + sanvith
+    * + avdrag
+    * + remaining income
+    */
+    const dedicatedSavings =
+      annualSave +
+      sanvithII +
+      sanvith +
+      avdrag;
+
+    const netSavings =
+      dedicatedSavings + netRemaining;
+
+
+    /*
+    * Savings rate
+    */
+    const savingsRate =
+      yearlyIncome > 0
+        ? (netSavings / yearlyIncome) * 100
+        : 0;
+
+
+    /*
+    * Update cards
+    */
+
+    const incomeElement =
+      document.getElementById("overviewIncome");
+
+    const expenseElement =
+      document.getElementById("overviewExpense");
+
+    const savingsElement =
+      document.getElementById("overviewSavings");
+
+    const savingsRateElement =
+      document.getElementById("overviewSavingsRate");
+
+
+    if (incomeElement) {
+      incomeElement.textContent =
+        kr.format(yearlyIncome);
+    }
+
+    if (expenseElement) {
+      expenseElement.textContent =
+        kr.format(yearlyExpense);
+    }
+
+    if (savingsElement) {
+      savingsElement.textContent =
+        kr.format(netSavings);
+    }
+
+    if (savingsRateElement) {
+      savingsRateElement.textContent =
+        `${savingsRate.toFixed(1)}%`;
+    }
+
+
+    const incomeYearElement =
+      document.getElementById("overviewIncomeYear");
+
+    const expenseYearElement =
+      document.getElementById("overviewExpenseYear");
+
+    if (incomeYearElement) {
+      incomeYearElement.textContent = year;
+    }
+
+    if (expenseYearElement) {
+      expenseYearElement.textContent = year;
+    }
+  }
+
+  function initializeYearlyOverview() {
+    const overviewYearFilter =
+      document.getElementById("overviewYearFilter");
+
+    if (!overviewYearFilter) return;
+
+    overviewYearFilter.innerHTML = "";
+
+    years.forEach(year => {
+      overviewYearFilter.add(
+        new Option(year, year)
+      );
+    });
+
+    const currentYear =
+      String(new Date().getFullYear());
+
+    overviewYearFilter.value =
+      years.includes(currentYear)
+        ? currentYear
+        : years[0];
+
+    overviewYearFilter.addEventListener(
+      "change",
+      renderYearlyOverview
+    );
+
+    renderYearlyOverview();
+  }
+
   function initializeTrendChart() {
     const trendYearFilter = document.getElementById("trendYearFilter");
 

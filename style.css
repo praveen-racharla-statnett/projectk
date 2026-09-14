@@ -620,3 +620,115 @@ html:not(.authenticated) body:not(.auth-page) {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================
+   Yearly Financial Overview
+========================================== */
+
+.overview-heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.overview-heading-row .eyebrow {
+  margin-bottom: 4px;
+}
+
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.overview-card {
+  padding: 24px;
+  min-height: 190px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  background: #ffffff;
+
+  font-family: "Inter", sans-serif;
+}
+
+.overview-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  background: #f4f6f8;
+
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.overview-card-label {
+  margin-bottom: 10px;
+
+  color: #667085;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+.overview-card-value {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  font-weight: 700;
+
+  color: #182033;
+}
+
+.overview-card-caption {
+  margin-top: auto;
+
+  color: #8a9099;
+
+  font-size: 0.82rem;
+}
+
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+
+  .overview-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .overview-heading-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .overview-cards {
+    grid-template-columns: 1fr;
+  }
+
+}
