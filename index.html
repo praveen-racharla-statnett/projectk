@@ -41,23 +41,92 @@
 
     <section class="section" id="section1">
       <div class="container">
-        <h2>Section 1</h2>
-        <p>Add your content here.</p>
 
-        <div class="cards">
-          <article class="card">
-            <h3>Card 1</h3>
-            <p>Placeholder content.</p>
-          </article>
-          <article class="card">
-            <h3>Card 2</h3>
-            <p>Placeholder content.</p>
-          </article>
-          <article class="card">
-            <h3>Card 3</h3>
-            <p>Placeholder content.</p>
-          </article>
+        <div class="overview-heading-row">
+          <div>
+            <p class="eyebrow">FINANCIAL OVERVIEW</p>
+            <h2>Yearly Overview</h2>
+            <p>Your yearly income, expenses and savings at a glance.</p>
+          </div>
+
+          <select
+            id="overviewYearFilter"
+            class="budget-select"
+            aria-label="Overview year">
+          </select>
         </div>
+
+        <div class="overview-cards">
+
+          <article class="overview-card">
+            <div class="overview-card-icon">↗</div>
+            <span class="overview-card-label">YEARLY INCOME</span>
+
+            <strong
+              class="overview-card-value"
+              id="overviewIncome">
+              0 kr
+            </strong>
+
+            <span
+              class="overview-card-caption"
+              id="overviewIncomeYear">
+              —
+            </span>
+          </article>
+
+
+          <article class="overview-card">
+            <div class="overview-card-icon">↘</div>
+            <span class="overview-card-label">YEARLY EXPENSE</span>
+
+            <strong
+              class="overview-card-value"
+              id="overviewExpense">
+              0 kr
+            </strong>
+
+            <span
+              class="overview-card-caption"
+              id="overviewExpenseYear">
+              —
+            </span>
+          </article>
+
+
+          <article class="overview-card">
+            <div class="overview-card-icon">Σ</div>
+            <span class="overview-card-label">NET SAVINGS</span>
+
+            <strong
+              class="overview-card-value"
+              id="overviewSavings">
+              0 kr
+            </strong>
+
+            <span class="overview-card-caption">
+              Savings + mortgage principal + remaining
+            </span>
+          </article>
+
+
+          <article class="overview-card">
+            <div class="overview-card-icon">%</div>
+            <span class="overview-card-label">SAVINGS RATE</span>
+
+            <strong
+              class="overview-card-value"
+              id="overviewSavingsRate">
+              0%
+            </strong>
+
+            <span class="overview-card-caption">
+              Of yearly income
+            </span>
+          </article>
+
+        </div>
+
       </div>
     </section>
 
