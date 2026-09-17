@@ -1,0 +1,63 @@
+Structure reproduced from a real Trumf Kredittkort PDF as extracted by PDF.js.
+Personal identifiers are placeholders: no real name, address, account number,
+KID or invoice number appears here. Never add a real statement PDF or its raw
+extraction to this directory.
+Retur:
+NorgesGruppen Finans AS
+Postboks 130, 2381 Brumunddal
+Side 1 (2)
+Faktura
+Tlf: (+47) 22 56 33 00
+Fakturainformasjon
+Fakturanummer 00000000000000
+Fakturadato 31.08.26
+Forfallsdato 15.09.26
+Minstebeløp å betale 250,00
+Totalt skyldig beløp 969,43
+Til konto 0000 00 00000
+KID 000000000000
+Fornavn Etternavn
+Gateveien 0 A
+0000 Oslo
+Betalingsinformasjon
+Minimum å betale 250,00
+Totalt skyldig beløp som forfaller 969,43
+KID-nummer 000000000000
+Kontonummer 0000 00 00000
+Forfallsdato 15.09.26
+Med Trumf Kredittkort får du
+l 2 % Trumf-bonus på dagligvarer hos
+l Meny, Kiwi, Spar, Joker, CC-Mat, Nærbutikken
+Vi anbefaler at du betaler hele beløpet på kr 969,43 som forfaller
+15.09.26, men du er ikke forpliktet til å betale mer enn
+minstebeløpet. Velger du å betale mindre enn kr 969,43 vil det
+p å løpe renter p å restbeløpet etter forfallsdato. Å rlig nominell rente
+er 23,00%.
+trumf.no/trumfkredittkort
+Innvilget kreditt Disp. kreditt per 31.08.26 Totalt skyldig beløp Minstebeløp å betale
+25.000,00 24.030,57 -969,43 250,00
+Kredittgiver: NorgesGruppen Finans AS, Org. nr: 920 428 959 Foretaksregisteret
+Side 2 (2)
+Transaksjonsoversikt
+Bokf. dato Kjøpsdato Spesifikasjon Beløp i NOK
+Totalt skyldig beløp forrige periode -1.772,04
+03.08.26 03.08.26 Innbetaling 1.772,04
+Bokf. dato Kjøpsdato Spesifikasjon Kurs Valuta Beløp Beløp i NOK
+31.08.26 31.08.26 TrumfPay, KIWI 331 Storgata 33, 2026-08-31 NOK -187,90 -187,90
+18.53.15
+25.08.26 25.08.26 TrumfPay, Nærbutikken Etterstadsletta, NOK -164,90 -164,90
+2026-08-25 14.16.19
+25.08.26 25.08.26 TrumfPay, MENY Oslo City, 2026-08-25 15.20.11 NOK -293,39 -293,39
+11.08.26 11.08.26 TrumfPay, MENY CC Vest, 2026-08-11 18.13.03 NOK -233,34 -233,34
+07.08.26 07.08.26 TrumfPay, Joker Vossestrand, 2026-08-07 08.11.04 NOK -89,90 -89,90
+Nytt skyldig beløp -969,43
+Hvor mye koster det å dele opp betalingen?
+Vi anbefaler at du betaler hele beløpet p å kr -969,43 som forfaller 15.09.26 , men du er ikke forpliktet til å betale
+mer enn minstebeløpet. Velger du å betale mindre enn totalt skyldig beløp vil det p å løpe renter etter forfallsdato.
+Nedenfor finner du eksempler p å hva det koster å utsette kr 15.000 (hvor kr 13.000 er varekjøp og kr 2.000 er
+kontantuttak).
+Eksempel p å betalingsalternativ Rentebeløp kontantuttak** kostnader betaling* rente
+Betaler ved første faktura - 100 15.100 15.100 8,30 %***
+3 m å neder 582 100 15.682 15.227 30,73 %
+12 m å neder 1.947 100 17.047 1.421 27,19 %
+36 m å neder 5.943 100 21.043 585 26,20 %

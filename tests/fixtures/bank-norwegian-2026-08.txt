@@ -1,0 +1,57 @@
+Structure reproduced from a real Bank Norwegian PDF as extracted by PDF.js.
+Merchants, amounts and identifiers are INVENTED - the real statement's spending
+history is deliberately not committed. Only the layout quirks are faithful:
+  * "MERCHANT ,PLACE" separated by the last comma, sometimes without a space
+  * a masked card number in the Kortnr column
+  * NOK rows: "<local> NOK <nok>"; foreign rows: "<local> <CUR> <rate> <nok>"
+  * the payment row has "-" instead of a card number
+  * air ticket rows are followed by passenger/ticket detail lines
+Faktura
+Bank Norwegian-kortet
+Returadresse: Postboks 110, 1325 Lysaker, Norge
+Fakturadato 01.09.2026
+Forfallsdato 15.09.2026
+Periode 01.08.26 - 31.08.26
+KID-nummer 000000000000
+Fornavn Etternavn Til kontonr 0000.00.00000
+eFaktura ref 000000000000
+Gateveien 0 A
+0000 Oslo
+Side
+1 av 3
+Overført saldo fra forrige periode kr 6.831,49
+Sum innbetalinger 01.08.26 - 31.08.26 kr -6.831,49
+Sum transaksjoner denne perioden kr 23.064,79
+Totalt skyldig beløp per 01.09.2026 kr 23.064,79
+Minimum å betale (3,5% av saldo, minimum kr 807,27) kr 807,27
+M å nedlig nominell rente ved delbetaling av fakturabeløpet er 1,83 %.
+Innvilget kreditt kr 50.000,00
+Benyttet kreditt kr 23.064,79
+Tilgjengelig kreditt kr 26.935,21
+Betalingsinformasjon
+Minimum å betale kr 807,27
+Totalt skyldig beløp per 01.09.2026 kr 23.064,79
+KID-nummer 000000000000
+Kontonummer 0000.00.00000
+Transaksjoner for Fornavn Etternavn
+Bruksdato Brukersted - varegruppe Kortnr Lokal Valuta Valuta Valutakurs Beløp kr
+03.08.2026 Innbetaling fra 00000000000 - -6.831,49
+31.07.2026 KAFE SENTRUM ,OSLO 000000******0000 109,90 NOK 109,90
+02.08.2026 DAGLIGVARE NORD AS ,OSLO 000000******0000 84,00 NOK 84,00
+04.08.2026 FJORD OPPLEVELSER AS ,FLAAM 000000******0000 3.758,00 NOK 3.758,00
+05.08.2026 LODGING * ABC123XYZ ,800-000-0000 000000******0000 4.352,94 NOK 4.352,94
+05.08.2026 flyselskap.no ,0000000000 000000******0000 13.754,00 NOK 13.754,00
+Passasjer: FORNAVN ETTERNAVN
+Bilettnummer: 328-000000000
+Flyselskap:
+Avreise: 19.08.2026
+Reiserute: CDG OSL
+13.08.2026 SPILL OMBORD ,KRISTIANSAND 000000******0000 25,00 NOK 25,00
+13.08.2026 SPILL OMBORD ,KRISTIANSAND 000000******0000 25,00 NOK 25,00
+14.08.2026 KLESBUTIKK KIEL ,KIEL 000000******0000 44,50 EUR 11.1899 497,95
+19.08.2026 Inflight Services Selskap,Kista 000000******0000 38,00 NOK 38,00
+22.08.2026 KOLLEKTIVAPP ,OSLO 000000******0000 420,00 NOK 420,00
+Vi gjør oppmerksom p å at valutatransaksjoner og bruk av kort i utlandet blir rapportert til Valutaregisteret
+Utnyttet kreditt 3 mnd 6 mnd 12 mnd 24 mnd 36 mnd
+Kr 5.000 275,- 550,- 1.100,- 2.199,- 3.299,-
+Kr 15.000 825,- 1.649,- 3.299,- 6.597,- 9.896,-

@@ -866,3 +866,181 @@ html:not(.authenticated) body:not(.auth-page) {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Credit card statement import */
+
+.import-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.import-field {
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #6a7180;
+  text-transform: uppercase;
+}
+
+.import-field input[type="file"] {
+  min-height: 42px;
+  max-width: 260px;
+  padding: 9px 12px;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+}
+
+.import-field input[type="text"] {
+  padding: 0 12px;
+}
+
+.import-confirm {
+  border: 1px solid #171717;
+}
+
+.import-confirm:disabled {
+  border-color: #dddddd;
+  color: #9aa0ab;
+  cursor: not-allowed;
+}
+
+.import-status {
+  margin-top: 14px;
+  font-size: 0.9rem;
+  color: #606775;
+}
+
+.import-period-row {
+  margin-top: 12px;
+}
+
+.import-period-hint {
+  font-size: 0.8rem;
+  color: #606775;
+}
+
+.import-period-hint[data-derived="true"] {
+  color: #8a5a00;
+}
+
+.import-payments {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #ececec;
+}
+
+.import-status[data-tone="success"] {
+  color: #1c7a4b;
+}
+
+.import-status[data-tone="error"] {
+  color: #b3261e;
+}
+
+.import-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.import-summary-item {
+  display: grid;
+  gap: 2px;
+  padding: 12px;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  background: #fafafa;
+}
+
+.import-summary-item span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a7180;
+}
+
+.import-summary-item strong {
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}
+
+.import-warnings ul {
+  margin: 16px 0 0;
+  padding-left: 20px;
+  color: #8a5a00;
+  font-size: 0.88rem;
+}
+
+.import-table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+}
+
+.import-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.import-table th,
+.import-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #efefef;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.import-table th {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6a7180;
+}
+
+.import-table .import-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.import-merchant {
+  display: block;
+  font-weight: 600;
+}
+
+.import-raw {
+  display: block;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.75rem;
+  color: #8a909b;
+}
+
+.import-category {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .import-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .import-field input[type="file"] {
+    max-width: none;
+  }
+}

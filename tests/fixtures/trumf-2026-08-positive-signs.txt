@@ -1,0 +1,21 @@
+Same Trumf statement layout as trumf-2026-08.txt but with the transaction signs
+flipped, to prove the parser derives the sign convention from the payment line
+instead of assuming one. Placeholder data only.
+Fakturanummer 00000000000000
+Fakturadato 31.08.26
+Forfallsdato 15.09.26
+Minstebeløp å betale 250,00
+Totalt skyldig beløp 969,43
+Transaksjonsoversikt
+Bokf. dato Kjøpsdato Spesifikasjon Beløp i NOK
+Totalt skyldig beløp forrige periode 1.772,04
+03.08.26 03.08.26 Innbetaling -1.772,04
+Bokf. dato Kjøpsdato Spesifikasjon Kurs Valuta Beløp Beløp i NOK
+31.08.26 31.08.26 TrumfPay, KIWI 331 Storgata 33, 2026-08-31 NOK 187,90 187,90
+18.53.15
+25.08.26 25.08.26 TrumfPay, Nærbutikken Etterstadsletta, NOK 164,90 164,90
+2026-08-25 14.16.19
+25.08.26 25.08.26 TrumfPay, MENY Oslo City, 2026-08-25 15.20.11 NOK 293,39 293,39
+11.08.26 11.08.26 TrumfPay, MENY CC Vest, 2026-08-11 18.13.03 NOK 233,34 233,34
+07.08.26 07.08.26 TrumfPay, Joker Vossestrand, 2026-08-07 08.11.04 NOK 89,90 89,90
+Nytt skyldig beløp 969,43

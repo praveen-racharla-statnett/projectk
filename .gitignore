@@ -1,2 +1,8 @@
 supabase/functions/.env
 .env.local
+
+# Local-only credit card statement PDFs used for parser testing.
+# These contain private financial data and must never be committed.
+test-fixtures/*.pdf
+tests/fixtures/*.pdf
+*.pdf

@@ -21,6 +21,7 @@
         <a href="#section1">Section 1</a>
         <a href="#section2">Section 2</a>
         <a href="#budget">Budget</a>
+        <a href="#card-import">Card import</a>
         <a href="#contact">Contact</a>
         <button class="nav-logout" id="logoutButton" type="button">Log out</button>
       </nav>
@@ -234,6 +235,104 @@
   </div>
 </section>
 
+    <section class="section" id="card-import">
+      <div class="container">
+        <div class="budget-heading-row">
+          <div>
+            <p class="eyebrow">CREDIT CARD</p>
+            <h2>Import statement</h2>
+            <p>Your PDF is read in this browser only. It is never uploaded or stored.</p>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="import-controls">
+            <label class="import-field">
+              <span>Statement PDF</span>
+              <input id="importFile" type="file" accept="application/pdf" />
+            </label>
+
+            <label class="import-field">
+              <span>Provider</span>
+              <select id="importProvider" class="budget-select"></select>
+            </label>
+
+            <label class="import-field">
+              <span>Card alias</span>
+              <input id="importAlias" class="budget-select" type="text" placeholder="e.g. Trumf privat" />
+            </label>
+
+            <button id="importParseButton" class="filter-toggle-btn active" type="button">
+              Parse preview
+            </button>
+
+            <button id="importConfirmButton" class="filter-toggle-btn import-confirm" type="button" disabled>
+              Confirm Import
+            </button>
+          </div>
+
+          <div class="import-controls import-period-row">
+            <label class="import-field">
+              <span>Period start</span>
+              <input id="importPeriodStart" class="budget-select" type="date" />
+            </label>
+
+            <label class="import-field">
+              <span>Period end</span>
+              <input id="importPeriodEnd" class="budget-select" type="date" />
+            </label>
+
+            <p id="importPeriodHint" class="import-period-hint"></p>
+          </div>
+
+          <p id="importStatus" class="import-status" aria-live="polite"></p>
+
+          <div id="importSummary" class="import-summary"></div>
+          <div id="importWarnings" class="import-warnings"></div>
+
+          <div class="import-table-wrap">
+            <table class="import-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Posted</th>
+                  <th>Merchant</th>
+                  <th>Location</th>
+                  <th>Original</th>
+                  <th>Rate</th>
+                  <th>NOK</th>
+                  <th>Type</th>
+                  <th>Seq</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody id="importPreviewBody"></tbody>
+            </table>
+          </div>
+
+          <p id="importPreviewNote" class="chart-note"></p>
+
+          <div id="importPaymentsWrap" class="import-payments" hidden>
+            <p class="eyebrow">PAYMENTS (NOT SPENDING)</p>
+
+            <div class="import-table-wrap">
+              <table class="import-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>NOK</th>
+                  </tr>
+                </thead>
+                <tbody id="importPaymentsBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="contact">
       <div class="container">
         <h2>Contact</h2>
@@ -254,6 +353,11 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="supadata.js"></script>
   <script src="script.js"></script>
+  <script src="parsers/parser-utils.js"></script>
+  <script src="parsers/parser-registry.js"></script>
+  <script src="parsers/trumf-parser.js"></script>
+  <script src="parsers/bank-norwegian-parser.js"></script>
+  <script src="pdf-import.js"></script>
   <script>
     protectPage();
     document.getElementById("logoutButton").addEventListener("click", logout);
