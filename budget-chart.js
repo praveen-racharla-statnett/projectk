@@ -108,10 +108,13 @@
     const totals = new Map();
 
     categories.forEach(item => {
-      totals.set(
-        item.parent,
-        (totals.get(item.parent) || 0) + Number(item.amount || 0)
-      );
+      const amount = Number(item?.amount);
+      if (Number.isFinite(amount) && amount > 0) {
+        totals.set(
+          item.parent,
+          (totals.get(item.parent) || 0) + amount
+        );
+      }
     });
 
     return [...totals.entries()].map(([name, amount]) => ({ name, amount }));
@@ -831,7 +834,10 @@
 
   function render() {
     const data = selectedData();
-    const categories = data.categories || [];
+    const categories = (data.categories || []).filter(item => {
+      const amount = Number(item?.amount);
+      return Number.isFinite(amount) && amount > 0;
+    });
     const parents = buildParentData(categories);
 
     const expenseTotal = categories.reduce(
