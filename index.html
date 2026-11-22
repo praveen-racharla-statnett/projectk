@@ -20,6 +20,7 @@
         <a href="#home">Home</a>
         <a href="#section1">Overview</a>
         <a href="#budget">Budget</a>
+        <a href="#cards">Cards</a>
         <a href="#contact">Contact</a>
         <button class="nav-logout" id="logoutButton" type="button">Log out</button>
       </nav>
@@ -227,7 +228,76 @@
   </div>
 </section>
 
-    <section class="section" id="contact">
+    <section class="section" id="cards">
+      <div class="container">
+        <p class="eyebrow">CREDIT CARD</p>
+        <h2>Upload statement</h2>
+        <p>Choose a card and upload its PDF statement to review and import the transactions.</p>
+
+        <form class="chart-card card-upload-form" id="cardUploadForm">
+          <label class="card-upload-field">
+            <span>Card</span>
+            <select id="cardSelect" class="budget-select" required disabled>
+              <option value="">Loading cards…</option>
+            </select>
+          </label>
+
+          <label class="card-upload-field">
+            <span>Statement PDF</span>
+            <input
+              type="file"
+              id="statementFile"
+              class="card-file-input"
+              accept="application/pdf,.pdf"
+              required>
+          </label>
+
+          <button type="submit" class="card-button" id="cardPreviewButton" disabled>
+            Preview transactions
+          </button>
+
+          <p class="card-upload-status" id="cardUploadStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <dialog class="card-review-dialog" id="cardReviewDialog" aria-labelledby="cardReviewTitle">
+      <div class="card-review-header">
+        <div>
+          <h3 id="cardReviewTitle">Transactions</h3>
+          <p id="cardReviewSubtitle"></p>
+        </div>
+        <button type="button" class="card-review-close" data-close-dialog aria-label="Close">×</button>
+      </div>
+
+      <div class="card-review-table-wrap">
+        <table class="card-review-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="cardReviewSelectAll" aria-label="Select all transactions"></th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Foreign</th>
+              <th class="amount-col">Amount (NOK)</th>
+            </tr>
+          </thead>
+          <tbody id="cardReviewRows"></tbody>
+        </table>
+      </div>
+
+      <div class="card-review-footer">
+        <div>
+          <strong id="cardReviewSummary"></strong>
+          <p class="card-review-error" id="cardReviewError" role="alert"></p>
+        </div>
+        <div class="card-review-actions">
+          <button type="button" class="card-button secondary" data-close-dialog>Cancel</button>
+          <button type="button" class="card-button" id="cardReviewApprove">Approve &amp; save</button>
+        </div>
+      </div>
+    </dialog>
+
+    <section class="section alt" id="contact">
       <div class="container">
         <h2>Contact</h2>
         <p>Contact details can go here.</p>
@@ -247,6 +317,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
   <script src="supadata.js"></script>
   <script src="script.js"></script>
+  <script src="credit-card-parser.js"></script>
+  <script src="credit-card-import.js"></script>
   <script>
     protectPage();
     document.getElementById("logoutButton").addEventListener("click", logout);

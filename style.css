@@ -866,3 +866,211 @@ html:not(.authenticated) body:not(.auth-page) {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================
+   Credit card statement upload
+========================================== */
+
+.card-upload-form {
+  display: grid;
+  gap: 16px;
+  align-items: end;
+}
+
+.card-upload-field {
+  display: grid;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #606775;
+}
+
+.card-file-input {
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px dashed #c9ccd3;
+  border-radius: 12px;
+  background: #fafafa;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+}
+
+.card-button {
+  min-height: 42px;
+  padding: 0 20px;
+  border: 1px solid #171717;
+  border-radius: 999px;
+  background: #171717;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card-button.secondary {
+  background: #ffffff;
+  color: #171717;
+}
+
+.card-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.card-upload-status {
+  grid-column: 1 / -1;
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  color: #606775;
+}
+
+.card-upload-status.error {
+  color: #c0392b;
+}
+
+.card-upload-status.success {
+  color: #1e8e5a;
+}
+
+@media (min-width: 760px) {
+  .card-upload-form {
+    grid-template-columns: minmax(180px, 1fr) 2fr auto;
+  }
+}
+
+.card-review-dialog {
+  width: min(100% - 24px, 960px);
+  max-height: min(90vh, 900px);
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+}
+
+.card-review-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-review-dialog::backdrop {
+  background: rgba(23, 23, 23, 0.55);
+}
+
+.card-review-header,
+.card-review-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.card-review-header {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.card-review-header p {
+  font-size: 0.85rem;
+  color: #606775;
+}
+
+.card-review-close {
+  border: none;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.card-review-table-wrap {
+  flex: 1;
+  overflow: auto;
+}
+
+.card-review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.card-review-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 10px 8px;
+  background: #f6f6f6;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #606775;
+}
+
+.card-review-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  white-space: nowrap;
+}
+
+.card-review-table td:nth-child(3) {
+  width: 100%;
+}
+
+.card-review-table th.amount-col {
+  text-align: right;
+}
+
+.card-review-table input[type="text"],
+.card-review-table input[type="date"],
+.card-review-table input[type="number"] {
+  width: 100%;
+  min-width: 120px;
+  padding: 6px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  font: inherit;
+}
+
+.card-review-table input:focus {
+  border-color: #c9ccd3;
+  background: #ffffff;
+  outline: none;
+}
+
+.card-review-table .amount-input {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-review-table tr.excluded td {
+  opacity: 0.45;
+}
+
+.card-review-table tr.excluded td:first-child {
+  opacity: 1;
+}
+
+.foreign-amount {
+  font-size: 0.8rem;
+  color: #606775;
+}
+
+.card-review-footer {
+  border-top: 1px solid #e8e8e8;
+  flex-wrap: wrap;
+}
+
+.card-review-error {
+  font-size: 0.85rem;
+  color: #c0392b;
+}
+
+.card-review-actions {
+  display: flex;
+  gap: 8px;
+}
