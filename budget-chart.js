@@ -88,9 +88,20 @@
       });
     });
 
+    // Keep sub-categories contiguous per parent so the outer ring lines up
+    // with the inner ring, even when a category first appears in a later month.
+    const parentOrder = [];
+    categoryMap.forEach(item => {
+      if (!parentOrder.includes(item.parent)) parentOrder.push(item.parent);
+    });
+
+    const categories = [...categoryMap.values()].sort(
+      (a, b) => parentOrder.indexOf(a.parent) - parentOrder.indexOf(b.parent)
+    );
+
     return {
       income,
-      categories: [...categoryMap.values()]
+      categories
     };
   }
 
