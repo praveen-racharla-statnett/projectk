@@ -16,6 +16,7 @@
   const dialog = document.getElementById("cardReviewDialog");
   const dialogTitle = document.getElementById("cardReviewTitle");
   const dialogSubtitle = document.getElementById("cardReviewSubtitle");
+  const dueDateInput = document.getElementById("cardReviewDueDate");
   const tableBody = document.getElementById("cardReviewRows");
   const selectAll = document.getElementById("cardReviewSelectAll");
   const summary = document.getElementById("cardReviewSummary");
@@ -59,7 +60,7 @@
   async function loadCards() {
     const { data, error } = await supabaseClient
       .from("credit_cards")
-      .select("id, name, issuer")
+      .select("id, name, issuer, amount_sign")
       .eq("active", true)
       .order("sort_order", { ascending: true });
 
@@ -74,7 +75,9 @@
     }
 
     data.forEach(card => {
-      cardSelect.append(new Option(card.name, card.id));
+      const option = new Option(card.name, card.id);
+      option.dataset.amountSign = card.amount_sign ?? 1;
+      cardSelect.append(option);
     });
     cardSelect.disabled = false;
     updatePreviewButton();
@@ -118,7 +121,7 @@
       const buffer = await file.arrayBuffer();
       const fileHash = await sha256Hex(buffer);
       // pdf.js transfers (detaches) the buffer it is given, so pass a copy.
-      const { rows, transactions } = await readPdf(new Uint8Array(buffer.slice(0)));
+      const { rows, transactions, dueDate } = await readPdf(new Uint8Array(buffer.slice(0)));
 
       if (!rows.length) {
         setStatus("No text found in the PDF. Scanned statements are not supported.", "error");
@@ -131,11 +134,18 @@
         return;
       }
 
+      // Issuers that print purchases as negative amounts have amount_sign -1.
+      const amountSign = Number(cardSelect.selectedOptions[0].dataset.amountSign) || 1;
+      transactions.forEach(tx => {
+        tx.amount = Math.round(tx.amount * amountSign * 100) / 100;
+      });
+
       pending = {
         cardId,
         cardName: cardSelect.selectedOptions[0].textContent,
         fileName: file.name,
         fileHash,
+        dueDate,
         transactions
       };
 
@@ -225,6 +235,7 @@
   function openReview() {
     dialogTitle.textContent = `${pending.cardName} transactions`;
     dialogSubtitle.textContent = pending.fileName;
+    dueDateInput.value = pending.dueDate || "";
     dialogError.textContent = "";
     renderRows();
     dialog.showModal();
@@ -294,7 +305,8 @@
       p_card_id: pending.cardId,
       p_file_name: pending.fileName,
       p_file_sha256: pending.fileHash,
-      p_transactions: transactions
+      p_transactions: transactions,
+      p_due_date: dueDateInput.value || null
     });
 
     if (error) {
@@ -316,6 +328,7 @@
       `Saved ${data.inserted} ${cardName} transaction(s).${skipped}`,
       "success"
     );
+    document.dispatchEvent(new CustomEvent("card-transactions-changed"));
   }
 
   form.addEventListener("submit", handlePreview);

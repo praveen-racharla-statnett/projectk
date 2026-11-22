@@ -233,12 +233,38 @@
     return rows;
   }
 
-  async function parsePdf(pdfjsLib, data, password) {
-    const rows = await extractRowsFromPdf(pdfjsLib, data, password);
-    return { rows, transactions: parseRows(rows) };
+  // Finds the payment due date ("Forfallsdato", "Betalingsfrist", "Due date").
+  function findDueDate(rows) {
+    for (let i = 0; i < rows.length; i += 1) {
+      const text = rows[i].join(" ");
+      const keyword = text.match(/forfall|betalingsfrist|betales innen|due date/i);
+      if (!keyword) continue;
+
+      // The due date follows the keyword, possibly on the next row.
+      const candidates = [text.slice(keyword.index), (rows[i + 1] || []).join(" ")];
+      for (const candidate of candidates) {
+        const match = candidate.match(/\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b/);
+        const iso = match && toIsoDate(match[1], match[2], match[3]);
+        if (iso) return iso;
+      }
+    }
+    return null;
   }
 
-  const api = { parseAmount, parseRow, parseRows, itemsToRows, extractRowsFromPdf, parsePdf };
+  async function parsePdf(pdfjsLib, data, password) {
+    const rows = await extractRowsFromPdf(pdfjsLib, data, password);
+    return { rows, transactions: parseRows(rows), dueDate: findDueDate(rows) };
+  }
+
+  const api = {
+    parseAmount,
+    parseRow,
+    parseRows,
+    findDueDate,
+    itemsToRows,
+    extractRowsFromPdf,
+    parsePdf
+  };
 
   root.CreditCardParser = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
