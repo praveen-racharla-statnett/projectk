@@ -21,6 +21,7 @@
         <a href="#section1">Overview</a>
         <a href="#budget">Budget</a>
         <a href="#cards">Cards</a>
+        <a href="#card-spending">Spending</a>
         <a href="#contact">Contact</a>
         <button class="nav-logout" id="logoutButton" type="button">Log out</button>
       </nav>
@@ -266,6 +267,10 @@
         <div>
           <h3 id="cardReviewTitle">Transactions</h3>
           <p id="cardReviewSubtitle"></p>
+          <label class="card-review-due">
+            <span>Due date</span>
+            <input type="date" id="cardReviewDueDate">
+          </label>
         </div>
         <button type="button" class="card-review-close" data-close-dialog aria-label="Close">×</button>
       </div>
@@ -297,7 +302,169 @@
       </div>
     </dialog>
 
-    <section class="section alt" id="contact">
+    <section class="section alt" id="card-spending">
+      <div class="container">
+        <div class="budget-heading-row">
+          <div>
+            <p class="eyebrow">CARD SPENDING</p>
+            <h2>Card spending</h2>
+          </div>
+
+          <div class="budget-filters">
+            <select id="cardDashCard" class="budget-select" aria-label="Card"></select>
+            <select id="cardDashYear" class="budget-select" aria-label="Year"></select>
+            <select id="cardDashMonth" class="budget-select" aria-label="Month"></select>
+          </div>
+        </div>
+
+        <p class="card-upload-status" id="cardDashStatus" role="status" aria-live="polite">Loading card transactions…</p>
+
+        <div id="cardDashContent" hidden>
+          <div class="overview-cards card-kpis">
+            <article class="overview-card">
+              <div class="overview-card-icon">kr</div>
+              <span class="overview-card-label">CARD SPENDING</span>
+              <strong class="overview-card-value" id="cardKpiTotal">0 kr</strong>
+              <span class="overview-card-caption" id="cardKpiTotalCaption">—</span>
+            </article>
+
+            <article class="overview-card">
+              <div class="overview-card-icon">±</div>
+              <span class="overview-card-label">CHANGE</span>
+              <strong class="overview-card-value" id="cardKpiChange">—</strong>
+              <span class="overview-card-caption" id="cardKpiChangeCaption">—</span>
+            </article>
+
+            <article class="overview-card">
+              <div class="overview-card-icon">ø</div>
+              <span class="overview-card-label">AVERAGE PURCHASE</span>
+              <strong class="overview-card-value" id="cardKpiAverage">0 kr</strong>
+              <span class="overview-card-caption" id="cardKpiAverageCaption">—</span>
+            </article>
+
+            <article class="overview-card">
+              <div class="overview-card-icon">€</div>
+              <span class="overview-card-label">FOREIGN CURRENCY</span>
+              <strong class="overview-card-value" id="cardKpiForeign">0 kr</strong>
+              <span class="overview-card-caption" id="cardKpiForeignCaption">—</span>
+            </article>
+          </div>
+
+          <div class="chart-card">
+            <div class="trend-chart-header">
+              <div>
+                <p class="eyebrow">MONTHLY</p>
+                <h3>Spend per card vs budget</h3>
+              </div>
+            </div>
+            <p class="chart-note card-chart-note">By statement month — the month the bill is paid. Dashed line = budget.</p>
+            <div class="card-chart-wrap">
+              <canvas id="cardMonthlyChart" aria-label="Monthly card spending versus budget"></canvas>
+            </div>
+          </div>
+
+          <div class="card-dash-grid">
+            <div class="chart-card">
+              <p class="eyebrow">CATEGORIES</p>
+              <h3>Spend by category</h3>
+              <p class="chart-note card-chart-note">Click a slice to filter the transactions.</p>
+              <div class="card-chart-wrap">
+                <canvas id="cardCategoryChart" aria-label="Spending by category"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <p class="eyebrow">MERCHANTS</p>
+              <h3>Top merchants</h3>
+              <div class="card-chart-wrap">
+                <canvas id="cardMerchantChart" aria-label="Top merchants by spend"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <p class="eyebrow">DAILY</p>
+            <h3>Spending calendar <span id="cardHeatmapYear"></span></h3>
+            <div class="heatmap-wrap" id="cardHeatmap"></div>
+            <div class="heatmap-legend" aria-hidden="true">
+              <span>Less</span>
+              <span class="heatmap-cell" data-level="0"></span>
+              <span class="heatmap-cell" data-level="1"></span>
+              <span class="heatmap-cell" data-level="2"></span>
+              <span class="heatmap-cell" data-level="3"></span>
+              <span class="heatmap-cell" data-level="4"></span>
+              <span>More</span>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <p class="eyebrow">RECURRING</p>
+            <h3>Recurring payments</h3>
+            <div class="card-table-wrap">
+              <table class="card-table">
+                <thead>
+                  <tr>
+                    <th>Merchant</th>
+                    <th>Card</th>
+                    <th>Category</th>
+                    <th class="num">Typical</th>
+                    <th class="num">Months</th>
+                    <th>Last charge</th>
+                    <th class="num">≈ Per year</th>
+                  </tr>
+                </thead>
+                <tbody id="cardRecurringRows"></tbody>
+              </table>
+            </div>
+            <p class="chart-note" id="cardRecurringEmpty" hidden>
+              No recurring payments detected yet. They appear after the same merchant charges a similar amount in consecutive months.
+            </p>
+          </div>
+
+          <div class="chart-card" id="cardTxCard">
+            <div class="trend-chart-header">
+              <div>
+                <p class="eyebrow">TRANSACTIONS</p>
+                <h3>All transactions</h3>
+              </div>
+              <div class="budget-filters">
+                <input type="search" id="cardTxSearch" class="budget-select card-search" placeholder="Search description" aria-label="Search transactions">
+                <select id="cardTxCategory" class="budget-select" aria-label="Category"></select>
+              </div>
+            </div>
+
+            <div class="rule-prompt" id="cardRulePrompt" hidden>
+              <span id="cardRuleText"></span>
+              <input type="text" id="cardRulePattern" class="budget-select" aria-label="Description text to match">
+              <button type="button" class="card-button" id="cardRuleCreate">Create rule</button>
+              <button type="button" class="card-button secondary" id="cardRuleDismiss">No thanks</button>
+            </div>
+
+            <div class="card-table-wrap">
+              <table class="card-table">
+                <thead id="cardTxHead">
+                  <tr>
+                    <th data-sort="transaction_date"><button type="button">Date</button></th>
+                    <th data-sort="card_name"><button type="button">Card</button></th>
+                    <th data-sort="description"><button type="button">Description</button></th>
+                    <th data-sort="category_name"><button type="button">Category</button></th>
+                    <th data-sort="amount" class="num"><button type="button">Amount</button></th>
+                  </tr>
+                </thead>
+                <tbody id="cardTxRows"></tbody>
+              </table>
+            </div>
+
+            <div class="card-table-footer">
+              <strong id="cardTxSummary"></strong>
+              <button type="button" class="card-button secondary" id="cardTxMore" hidden>Show more</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
       <div class="container">
         <h2>Contact</h2>
         <p>Contact details can go here.</p>
@@ -319,6 +486,8 @@
   <script src="script.js"></script>
   <script src="credit-card-parser.js"></script>
   <script src="credit-card-import.js"></script>
+  <script src="card-analytics.js"></script>
+  <script src="card-dashboard.js"></script>
   <script>
     protectPage();
     document.getElementById("logoutButton").addEventListener("click", logout);
